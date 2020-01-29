@@ -52,6 +52,11 @@ export class LionRadioGroup extends LionFieldset {
     this._setCheckedRadioElement(value, (el, val) => el.formattedValue === val);
   }
 
+  addFormElement(child) {
+    this.__delegateNameAttribute(child);
+    super.addFormElement(child);
+  }
+
   connectedCallback() {
     super.connectedCallback();
     this.addEventListener('model-value-changed', this._checkRadioElements);
@@ -121,5 +126,36 @@ export class LionRadioGroup extends LionFieldset {
       return true;
     }
     return false;
+  }
+
+  /**
+   * @override from LionFieldset
+   */
+  // eslint-disable-next-line class-methods-use-this
+  get _childrenMayHaveSameName() {
+    return true;
+  }
+
+  /**
+   * @override from LionFieldset
+   */
+  // eslint-disable-next-line class-methods-use-this
+  get _childNamesMayBeDuplicate() {
+    return true;
+  }
+
+  __delegateNameAttribute(child) {
+    if (child.tagName === 'LION-RADIO' && (!child.name || child.name === this.name)) {
+      // eslint-disable-next-line no-param-reassign
+      child.name = this.name;
+    } else {
+      throw new Error(
+        `The lion-radio-group name="${
+          this.name
+        }" does not allow to register ${child.tagName.toLowerCase()} with custom names (name="${
+          child.name
+        }" given)`,
+      );
+    }
   }
 }
