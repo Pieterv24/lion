@@ -3,19 +3,19 @@ import { LionFieldset } from '@lion/fieldset';
 /**
  * LionRadioGroup: extends the lion-fieldset
  *
- * <lion-radio-group>
+ * <lion-radio-group name="radios">
  *   <label slot="label">My Radio</label>
- *   <lion-radio name="name[]">
+ *   <lion-radio>
  *     <label slot="label">Male</label>
  *   </lion-radio>
- *   <lion-radio name="name[]">
+ *   <lion-radio>
  *     <label slot="label">Female</label>
  *   </lion-radio>
  * </lion-radio-group>
  *
  * You can preselect an option by setting marking an lion-radio checked.
  *   Example:
- *   <lion-radio name="name[]" checked>
+ *   <lion-radio checked></lion-radio>
  *
  * It extends LionFieldset so it inherits it's features.
  *
@@ -25,12 +25,12 @@ import { LionFieldset } from '@lion/fieldset';
  */
 
 export class LionRadioGroup extends LionFieldset {
-  get checkedValue() {
+  get modelValue() {
     const el = this._getCheckedRadioElement();
     return el ? el.modelValue.value : '';
   }
 
-  set checkedValue(value) {
+  set modelValue(value) {
     this._setCheckedRadioElement(value, (el, val) => el.modelValue.value === val);
   }
 
@@ -53,6 +53,18 @@ export class LionRadioGroup extends LionFieldset {
   }
 
   addFormElement(child) {
+    if (
+      typeof child.modelValue.checked !== 'boolean' ||
+      !Object.prototype.hasOwnProperty.call(child.modelValue, 'value')
+    ) {
+      throw new Error(
+        `The lion-radio-group name="${
+          this.name
+        }" does not allow to register ${child.tagName.toLowerCase()} with .modelValue="${
+          child.modelValue
+        }" - The modelValue should represent a type radio with { value: "foo", checked: false }`,
+      );
+    }
     this.__delegateNameAttribute(child);
     super.addFormElement(child);
   }
@@ -107,18 +119,15 @@ export class LionRadioGroup extends LionFieldset {
   }
 
   __triggerCheckedValueChanged() {
-    const value = this.checkedValue;
+    const value = this.modelValue;
     if (value != null && value !== this.__previousCheckedValue) {
-      this.dispatchEvent(
-        new CustomEvent('checked-value-changed', { bubbles: true, composed: true }),
-      );
       this.touched = true;
       this.__previousCheckedValue = value;
     }
   }
 
   _isEmpty() {
-    const value = this.checkedValue;
+    const value = this.modelValue;
     if (typeof value === 'string' && value === '') {
       return true;
     }
@@ -145,7 +154,7 @@ export class LionRadioGroup extends LionFieldset {
   }
 
   __delegateNameAttribute(child) {
-    if (child.tagName === 'LION-RADIO' && (!child.name || child.name === this.name)) {
+    if (!child.name || child.name === this.name) {
       // eslint-disable-next-line no-param-reassign
       child.name = this.name;
     } else {

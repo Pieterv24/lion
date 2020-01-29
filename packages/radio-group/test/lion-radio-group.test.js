@@ -44,11 +44,11 @@ describe('<lion-radio-group>', () => {
     `);
     await nextFrame();
     const invalidChild = await fixture(html`
-      <lion-radio name="first-name" .modelValue=${'Lara'}></lion-radio>
+      <lion-radio .modelValue=${'Lara'}></lion-radio>
     `);
 
     expect(() => {
-      el.appendChild(invalidChild);
+      el.addFormElement(invalidChild);
     }).to.throw(
       'The lion-radio-group name="gender" does not allow to register lion-radio with .modelValue="Lara" - The modelValue should represent a type radio with { value: "foo", checked: false }',
     );
