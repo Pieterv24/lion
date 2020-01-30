@@ -18,11 +18,11 @@ describe('<lion-checkbox-group>', () => {
       </lion-checkbox-group>
     `);
     await nextFrame();
-    expect(el.modelValue).to.equal(['female']);
+    expect(el.modelValue).to.eql(['female']);
     el.formElementsArray[0].checked = true;
-    expect(el.modelValue).to.equal(['male', 'female']);
+    expect(el.modelValue).to.eql(['male', 'female']);
     el.formElementsArray[2].checked = true;
-    expect(el.modelValue).to.equal(['male', 'female', 'other']);
+    expect(el.modelValue).to.eql(['male', 'female', 'other']);
   });
 
   it('throws if a child element without a modelValue like { value: "foo", checked: false } tries to register', async () => {
@@ -35,22 +35,13 @@ describe('<lion-checkbox-group>', () => {
     `);
     await nextFrame();
     const invalidChild = await fixture(html`
-      <lion-checkbox name="first-name" .modelValue=${'Lara'}></lion-checkbox>
-    `);
-    const anotherInvalidChild = await fixture(html`
-      <input name="first-name" .modelValue=${'Lara'}></input>
+      <input .modelValue=${'Lara'}></input>
     `);
 
     expect(() => {
       el.addFormElement(invalidChild);
     }).to.throw(
-      'The lion-checkbox-group name="gender[]" does not allow to register element with .modelValue="Lara" - The modelValue should represent a type checkbox with { value: "foo", checked: false }',
-    );
-
-    expect(() => {
-      el.addFormElement(anotherInvalidChild);
-    }).to.throw(
-      'The lion-checkbox-group name="gender[]" does not allow to register element with .modelValue="Lara" - The modelValue should represent a type checkbox with { value: "foo", checked: false }',
+      'The lion-checkbox-group name="gender[]" does not allow to register input with .modelValue="Lara" - The modelValue should represent a type checkbox with { value: "foo", checked: false }',
     );
   });
 
@@ -95,7 +86,7 @@ describe('<lion-checkbox-group>', () => {
 
   it('can set initial modelValue on creation', async () => {
     const el = await fixture(html`
-      <lion-checkbox-group name="gender[]" .modelValue=${'other'}>
+      <lion-checkbox-group name="gender[]" .modelValue=${['other']}>
         <lion-checkbox .choiceValue=${'male'}></lion-checkbox>
         <lion-checkbox .choiceValue=${'female'}></lion-checkbox>
         <lion-checkbox .choiceValue=${'other'}></lion-checkbox>
@@ -106,7 +97,25 @@ describe('<lion-checkbox-group>', () => {
     await el.registrationReady;
     await el.updateComplete;
 
-    expect(el.modelValue).to.equal('other');
+    expect(el.modelValue).to.eql(['other']);
+    expect(el.formElementsArray[2].checked).to.be.true;
+  });
+
+  it('can check multiple checkboxes by setting the modelValue', async () => {
+    const el = await fixture(html`
+      <lion-checkbox-group name="gender[]">
+        <lion-checkbox .choiceValue=${'male'}></lion-checkbox>
+        <lion-checkbox .choiceValue=${'female'}></lion-checkbox>
+        <lion-checkbox .choiceValue=${'other'}></lion-checkbox>
+      </lion-checkbox-group>
+    `);
+
+    await nextFrame();
+    await el.registrationReady;
+    await el.updateComplete;
+    el.modelValue = ['male', 'other'];
+    expect(el.modelValue).to.eql(['male', 'other']);
+    expect(el.formElementsArray[0].checked).to.be.true;
     expect(el.formElementsArray[2].checked).to.be.true;
   });
 

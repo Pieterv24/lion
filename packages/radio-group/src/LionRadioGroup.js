@@ -141,7 +141,7 @@ export class LionRadioGroup extends LionFieldset {
    * @override from LionFieldset
    */
   // eslint-disable-next-line class-methods-use-this
-  get _childrenMayHaveSameName() {
+  get _childrenCanHaveSameName() {
     return true;
   }
 
@@ -149,7 +149,7 @@ export class LionRadioGroup extends LionFieldset {
    * @override from LionFieldset
    */
   // eslint-disable-next-line class-methods-use-this
-  get _childNamesMayBeDuplicate() {
+  get _childNamesCanBeDuplicate() {
     return true;
   }
 

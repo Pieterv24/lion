@@ -16,24 +16,24 @@ Its purpose is to provide a way for users to check **multiple** options amongst 
 <Story name="Default">
   {html`
     <lion-checkbox-group
-      name="scientistsGroup"
+      name="scientists[]"
       label="Favorite scientists"
     >
-      <lion-checkbox name="scientists[]" label="Archimedes" .choiceValue=${'Archimedes'}></lion-checkbox>
-      <lion-checkbox name="scientists[]" label="Francis Bacon" .choiceValue=${'Francis Bacon'}></lion-checkbox>
-      <lion-checkbox name="scientists[]" label="Marie Curie" .choiceValue=${'Marie Curie'}></lion-checkbox>
+      <lion-checkbox label="Archimedes" .choiceValue=${'Archimedes'}></lion-checkbox>
+      <lion-checkbox label="Francis Bacon" .choiceValue=${'Francis Bacon'}></lion-checkbox>
+      <lion-checkbox label="Marie Curie" .choiceValue=${'Marie Curie'}></lion-checkbox>
     </lion-checkbox-group>
   `}
 </Story>
 
 ```html
 <lion-checkbox-group
-  name="scientistsGroup"
+  name="scientists[]"
   label="Favourite scientists"
 >
-  <lion-checkbox name="scientists[]" label="Archimedes" .choiceValue=${'Archimedes'}></lion-checkbox>
-  <lion-checkbox name="scientists[]" label="Francis Bacon" .choiceValue=${'Francis Bacon'}></lion-checkbox>
-  <lion-checkbox name="scientists[]" label="Marie Curie" .choiceValue=${'Marie Curie'}></lion-checkbox>
+  <lion-checkbox label="Archimedes" .choiceValue=${'Archimedes'}></lion-checkbox>
+  <lion-checkbox label="Francis Bacon" .choiceValue=${'Francis Bacon'}></lion-checkbox>
+  <lion-checkbox label="Marie Curie" .choiceValue=${'Marie Curie'}></lion-checkbox>
 </lion-checkbox-group>
 ```
 
