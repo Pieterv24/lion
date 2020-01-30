@@ -35,10 +35,6 @@ describe('lion-select-rich interactions', () => {
 
       expect(el.querySelector('lion-option').checked).to.be.true;
       expect(el.querySelector('lion-option').active).to.be.true;
-      expect(el.modelValue).to.deep.equal([
-        { value: 10, checked: true },
-        { value: 20, checked: false },
-      ]);
       expect(el.modelValue).to.equal(10);
 
       expect(el.checkedIndex).to.equal(0);
@@ -54,10 +50,6 @@ describe('lion-select-rich interactions', () => {
           </lion-options>
         </lion-select-rich>
       `);
-      expect(el.modelValue).to.deep.equal([
-        { value: null, checked: true },
-        { value: 20, checked: false },
-      ]);
       expect(el.modelValue).to.be.null;
     });
 
@@ -70,10 +62,6 @@ describe('lion-select-rich interactions', () => {
           </lion-options>
         </lion-select-rich>
       `);
-      expect(el.modelValue).to.deep.equal([
-        { value: 10, checked: false },
-        { value: 20, checked: true },
-      ]);
       expect(el.modelValue).to.equal(20);
     });
 
@@ -460,10 +448,7 @@ describe('lion-select-rich interactions', () => {
       `);
       const option = el.querySelectorAll('lion-option')[1];
       option.checked = true;
-      expect(el.modelValue).to.deep.equal([
-        { value: 10, checked: false },
-        { value: 20, checked: true },
-      ]);
+      expect(el.modelValue).to.equal(20);
     });
 
     it('does not allow to set checkedIndex or activeIndex to be out of bound', async () => {

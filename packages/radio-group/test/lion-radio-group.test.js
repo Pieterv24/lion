@@ -20,20 +20,6 @@ describe('<lion-radio-group>', () => {
     expect(el.modelValue).to.equal('other');
   });
 
-  it('will register child elements with the same name', async () => {
-    const el = await fixture(html`
-      <lion-radio-group name="gender">
-        <lion-radio .choiceValue=${'male'}></lion-radio>
-        <lion-radio .choiceValue=${'female'} checked></lion-radio>
-        <lion-radio .choiceValue=${'other'}></lion-radio>
-      </lion-radio-group>
-    `);
-    await nextFrame();
-    expect(el.formElementsArray[0].name).to.equal('gender');
-    expect(el.formElementsArray[1].name).to.equal('gender');
-    expect(el.formElementsArray[2].name).to.equal('gender');
-  });
-
   it('throws if a child element without a modelValue like { value: "foo", checked: false } tries to register', async () => {
     const el = await fixture(html`
       <lion-radio-group name="gender">
