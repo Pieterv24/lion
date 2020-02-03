@@ -11,7 +11,7 @@ As many of you may already know, ING has a long and rich history of Web Componen
 
 Web Components standards have finally matured, and today, there are many ways to build and consume your Web Components, like: [Angular Elements](https://angular.io/guide/elements), [Stencil](https://stenciljs.com/docs/introduction/), [Vue](https://vuejsdevelopers.com/2018/05/21/vue-js-web-component/), [Svelte](https://svelte.dev/) and many, many more. And with the release of the new [Chromium Edge](https://www.theverge.com/2020/1/15/21066767/microsoft-edge-chromium-new-browser-windows-mac-download-os), this means that all major browsers support Web Components natively.
 
-So today, I'm happy to share with you all that ING is open-sourcing it's own core library of Web Components: Lion! 🎉
+So today, I'm happy to share with you all that ING is open-sourcing its own core library of Web Components: Lion! 🎉
 
 ## Why Lion?
 
@@ -25,9 +25,9 @@ Finding components is hard, and can lead to a lot of frustration.
 
 > Alfred finds a perfect component for his use case, but unfortunately, it's written in a specific JavaScript framework, and GetRich.com uses a different framework, so sadly he's not able to use it.
 
-Additionally, companies have their own visual identities, and overriding fully styled components to make them look like the companies identity, can sometimes be more work than start styling from scratch.
+Additionally, companies have their own visual identities and overriding fully styled-components to make them look like the companies identity, can sometimes be more work than start styling from scratch.
 
-> Alfred finds a component that offers all the needed functionalities, however it looks vastly different from GetRich.com's identity.
+> Alfred finds a component that offers all the needed functionalities, however, it looks vastly different from GetRich.com's identity.
 
 ### Customize Functionality
 
@@ -37,9 +37,9 @@ Once you've found your perfect component, at some point down the line you may di
 
 ### Accessibility
 
-Your components should be usable by every kind of user. Accessibility is hard to get right, but an essential feature, additionally, accessibility issues can be impossible to fix at a later stage without breaking changes, so its crucial to incorporate accessibility right from the start.
+Your components should be usable by every kind of user. Accessibility is hard to get right, but an essential feature, additionally, accessibility issues can be impossible to fix at a later stage without breaking changes, so it is crucial to incorporate accessibility right from the start.
 
-> Somewhere down the line, Alfred finds an accessibility issue with a component he found online. He can't fix this issue in his code, so he asks the maintainers to help him out. They tell him they can't fix it, because they don't want to do a breaking change.
+> Somewhere down the line, Alfred finds an accessibility issue with a component he found online. He can't fix this issue in his code, so he asks the maintainers to help him out. They tell him they can't fix it because they don't want to do a breaking change.
 
 Or, alternatively
 
@@ -67,16 +67,16 @@ Now stop imagining, and look at Lion 🦁
 
 > We want to bring the web forward - one component at a time.
 
-Lion is a white label, open source, framework agnostic component library, and can  be the foundation for your codified in-house Design System. Aligning on design and usability is already a tough challenge, with Lion, we hope to take some of the work out of your hands.
+Lion is a white-label, open-source, framework-agnostic component library, and can be the foundation for your codified in-house Design System. Aligning on design and usability is already a tough challenge, with Lion, we hope to take some of the work out of your hands.
 
 ### White Label
-Lion is a core package of white label Web Components. What this means is that the core components only consist of very minimal styling, yet has all the fundamental functionalities. White label products are often created so others can easily rebrand them with their own visual identity. This is great, because it means that everyone can use the core functionalities of our components, while bringing their own branding or Design System, because surprisingly, not everyone loves orange.
+Lion is a core package of white label Web Components. What this means is that the core components only consist of very minimal styling, yet has all the fundamental functionalities. White label products are often created so others can easily rebrand them with their own visual identity. This is great because it means that everyone can use the core functionalities of our components while bringing their own branding or Design System because surprisingly, not everyone loves orange.
 
-And this is exactly what we at ING do as well. Our very own ing-web components extend the Lion components, and apply our own ING visual identity which mostly is a thin layer on top of Lion.
+And this is exactly what we at ING do as well. Our very own ing-web components extend the Lion components and apply our own ING visual identity which mostly is a thin layer on top of Lion.
 
 Check out the [Lion demo's](http://lion-web-components.netlify.com/). Looks plain, doesn't it? And now compare Lion to ing-web:
 
-<<---- ADD IMAGE ----->>
+![Lion - ing-web side by side](https://raw.githubusercontent.com/ing-bank/lion/chore/pilotphase/demo/stories/side-by-side.png)
 
 ### 🎯 Focus
 Lion was designed with a focus on global usage and reusability in mind. And as such, the following features were incorporated right from the start:
@@ -91,7 +91,7 @@ These features allow us to roll out our components globally and have a single po
 
 ING started using web components very early on, and Lion is not the first component library we built. So you may wonder, how are these components different from the previous generation?
 
-Lion is built from the ground up to allow for accessibility and extendability as we learned that these things are almost impossible to change/achieve at a later point  in development. We'd like to highlight a few of the lessons learned while making Lion:
+Lion is built from the ground up to allow for accessibility and extendability as we learned that these things are almost impossible to change/achieve at a later point in development. We'd like to highlight a few of the lessons learned while making Lion:
 
 - Not everything has to be a Web Component, for certain functionality regular JavaScript is better.
 - Stay as close to native semantic HTML elements as possible.
@@ -117,7 +117,6 @@ Consider:
 - Promoting Lion within your company
 - Showing Lion to your Tech Architects
 - Bring Lion up if there is a plan to start (codifying) your Design System
-
 - Extending Lion to make a web component version of your favorite design systems, such as: [Bulma](https://bulma.io/expo/), [Bootstrap](https://getbootstrap.com/), [Material](https://material.io/design/), [Bolt](https://boltdesignsystem.com/), [Argon](https://demos.creative-tim.com/vue-argon-design-system/documentation/), [Tailwind](https://tailwindcss.com/)
 - Or even suggest Lion to them!
 
@@ -135,14 +134,13 @@ You can also find us on the Polymer slack in the [#lion](https://polymer.slack.c
 
 You can join the Polymer slack by visiting [https://www.polymer-project.org/slack-invite](https://www.polymer-project.org/slack-invite).
 
-
 ## 🔨 Extend the components
 
 You can use Lion as the base to implement your own codified Design System.
 
 Let see how Alfred's story would have panned out if he would have chosen Lion instead.
 
-First install what you need
+First, install what you need
 
 ```bash
 npm i lit-element @lion/tabs
@@ -213,28 +211,28 @@ Excellent! Alfred can now use the tabs component like so:
 </alfred-tabs>
 ```
 
-There we go, Alfred's component is already done, so let's write some documentation. See the [live Alfred tabs documentation page](?path=/docs/intro-tabs-example--default-story). You can see the full code of `alfred-tabs` [on github](https://github.com/ing-bank/lion/tree/chore/pilotphase/demo/packages/tabs).
+There we go, Alfred's component is already done, so let's write some documentation. See the [live Alfred tabs documentation page](?path=/docs/intro-tabs-example--default-story). You can see the full code of `alfred-tabs` [on github](https://github.com/ing-bank/lion/tree/chore/pilotphase/demo/).
 
 P.S.: Do note that Alfred is now responsible for keeping the documentation of `alfred-tabs` up to date himself, and improvements on Lion's documentation will not automatically be reflected on Alfred's documentation.
 
 ### Why Open Source?
 
-Component libraries are in huge demand. By open sourcing our extendable components, we help people to _do your thing_, while reaping all the benefits from the open source community. What's more is that any contribution made to Lion directly impacts and benefits every design system using it (including ing-web) on a global scale. This means we get the best of both worlds by helping people with our components, and getting valuable contributions from the community!
+Component libraries are in huge demand. By open-sourcing our extendable components, we help people to _do your thing_, while reaping all the benefits from the open-source community. What's more, is that any contribution made to Lion directly impacts and benefits every design system using it (including ing-web) on a global scale. This means we get the best of both worlds by helping people with our components, and getting valuable contributions from the community!
 
-[Take a look at our repository!](https://github.com/ing-bank/lion/issues)
+[Take a look at our repository!](https://github.com/ing-bank/lion/) and if you wanna stay up to date be sure to watch and/or star it - there is no twitter (yet) but you can follow me [Thomas Allmer](https://twitter.com/daKmoR) - hey there 👋
 
 ### But there's more!
 
 Building applications is hard, and sometimes, you need a little bit more than just the right component alone, but also things like: Validation, Forms, Overlays, Localization, etc. But fear not; Lion has got you covered!
 
-You can check them out in our [documentation](http://lion-web-components.netlify.com/), and we'll go into more depth about Lion's additional systems in future blogposts.
+You can check them out in our [documentation](http://lion-web-components.netlify.com/), and we'll go into more depth about Lion's additional systems in future blog posts.
 
 ## Thanks
 
 Finally, we'd like to close this announcement by saying a few thank yous:
 
-ING, for giving us the opportunity to work on this project, and make it great together with the open source community.
+ING, for giving us the opportunity to work on this project, and make it great together with the open-source community.
 
 Everyone who has worked on Lion (especially the Lion team), including all the contributors (36 contributors and counting!).
 
-And finally [Pascal Schilp](https://twitter.com/passle_), for turning my scribbles into a followable story.
+And last but not least [Pascal Schilp](https://twitter.com/passle_), for turning my scribbles into a followable story.
