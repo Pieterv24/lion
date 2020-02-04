@@ -17,17 +17,17 @@ So today, I'm happy to share with you all that ING is open-sourcing its own core
 
 Imagine the following fictional scenario:
 
-> Alfred works at GetRich.com, and is working on a new in-house application.
+> Alfred works at Betatech, and is working on a new in-house application.
 
 ### Agnostic
 
 Finding components is hard, and can lead to a lot of frustration.
 
-> Alfred finds a perfect component for his use case, but unfortunately, it's written in a specific JavaScript framework, and GetRich.com uses a different framework, so sadly he's not able to use it.
+> Alfred finds a perfect component for his use case, but unfortunately, it's written in a specific JavaScript framework, and Betatech uses a different framework, so sadly he's not able to use it.
 
 Additionally, companies have their own visual identities and overriding fully styled-components to make them look like the companies identity, can sometimes be more work than start styling from scratch.
 
-> Alfred finds a component that offers all the needed functionalities, however, it looks vastly different from GetRich.com's identity.
+> Alfred finds a component that offers all the needed functionalities, however, it looks vastly different from Betatechs identity.
 
 ### Customize Functionality
 
@@ -175,7 +175,7 @@ export class AlfredTabs extends LionTabs {
 customElements.define('alfred-tabs', AlfredTabs);
 ```
 
-Alfred also wants to be able to style the tab and tab-panel according to GetRich.com's visual identity. In order to do so, he creates a `alfred-tab-panel` component and a `alfred-tab` component, which he can then fully style however he desires, and eventually place inside the `alfred-tabs` component. You can see how Alfred achieved this in the example down below.
+Alfred also wants to be able to style the tab and tab-panel according to Betatechs visual identity. In order to do so, he creates a `alfred-tab-panel` component and a `alfred-tab` component, which he can then fully style however he desires, and eventually place inside the `alfred-tabs` component. You can see how Alfred achieved this in the example down below.
 
 ```js
 import { LitElement, html, css } from 'lit-element';
