@@ -47,10 +47,10 @@ export const ChoiceGroupMixin = superclass =>
     /**
      * @override from FormRegistrarMixin
      */
-    addFormElement(child) {
+    addFormElement(child, indexToInsertAt) {
       this._throwWhenInvalidChildModelValue(child);
       this.__delegateNameAttribute(child);
-      super.addFormElement(child);
+      super.addFormElement(child, indexToInsertAt);
     }
 
     /**

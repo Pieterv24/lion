@@ -370,7 +370,7 @@ export class LionFieldset extends FormRegistrarMixin(
    *
    * @override
    */
-  addFormElement(child) {
+  addFormElement(child, indexToInsertAt) {
     const { name } = child;
     if (!name) {
       console.info('Error Node:', child); // eslint-disable-line no-console
@@ -390,7 +390,11 @@ export class LionFieldset extends FormRegistrarMixin(
       if (!Array.isArray(this.formElements[name])) {
         this.formElements[name] = [];
       }
-      this.formElements[name].push(child);
+      if (indexToInsertAt > 0) {
+        this.formElements[name].splice(indexToInsertAt, 0, child);
+      } else {
+        this.formElements[name].push(child);
+      }
     } else if (!this.formElements[name]) {
       this.formElements[name] = child;
     } else {

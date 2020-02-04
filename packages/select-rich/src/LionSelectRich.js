@@ -1,5 +1,7 @@
+import { ChoiceGroupMixin } from '@lion/choice-input';
 import { css, html, LitElement, SlotMixin } from '@lion/core';
 import { FormControlMixin, FormRegistrarMixin, InteractionStateMixin } from '@lion/field';
+import { formRegistrarManager } from '@lion/field/src/formRegistrarManager.js';
 import { OverlayMixin, withDropdownConfig } from '@lion/overlays';
 import { ValidateMixin } from '@lion/validate';
 import '../lion-select-invoker.js';
@@ -45,7 +47,9 @@ function isInView(container, element, partial = false) {
  * @extends {LitElement}
  */
 export class LionSelectRich extends OverlayMixin(
-  FormRegistrarMixin(InteractionStateMixin(ValidateMixin(FormControlMixin(SlotMixin(LitElement))))),
+  FormRegistrarMixin(
+    InteractionStateMixin(ChoiceGroupMixin(ValidateMixin(FormControlMixin(SlotMixin(LitElement))))),
+  ),
 ) {
   static get properties() {
     return {
@@ -108,19 +112,17 @@ export class LionSelectRich extends OverlayMixin(
   }
 
   get modelValue() {
-    const el = Array.from(this._listboxNode.children).find(option => option.checked);
+    const el = this.formElements.find(option => option.checked);
     return el ? el.modelValue.value : '';
   }
 
   set modelValue(value) {
-    const el = Array.from(this._listboxNode.children).find(
-      option => option.modelValue.value === value,
-    );
+    const el = this.formElements.find(option => option.modelValue.value === value);
 
     if (el) {
       el.checked = true;
     } else {
-      // cache user set modelValue until firstUpdated, and then try it again
+      // cache user set modelValue, and then try it again when registration is done
       this.__cachedUserSetModelValue = value;
     }
 
@@ -130,7 +132,7 @@ export class LionSelectRich extends OverlayMixin(
 
   get checkedIndex() {
     let checkedIndex = -1;
-    Array.from(this._listboxNode.children).forEach((option, i) => {
+    this.formElements.forEach((option, i) => {
       if (option.checked) {
         checkedIndex = i;
       }
@@ -197,10 +199,12 @@ export class LionSelectRich extends OverlayMixin(
     this.__setupInvokerNode();
     this.__setupListboxNode();
 
-    // Now that we have rendered our listbox, try setting the user defined modelValue again
-    if (this.__cachedUserSetModelValue) {
-      this.modelValue = this.__cachedUserSetModelValue;
-    }
+    formRegistrarManager.addEventListener('all-forms-open-for-registration', () => {
+      // Now that we have rendered + registered our listbox, try setting the user defined modelValue again
+      if (this.__cachedUserSetModelValue) {
+        this.modelValue = this.__cachedUserSetModelValue;
+      }
+    });
 
     this._invokerNode.selectedElement = this.formElements[this.checkedIndex];
     this.__toggleInvokerDisabled();
@@ -291,8 +295,9 @@ export class LionSelectRich extends OverlayMixin(
    *
    * @override
    * @param {*} child
+   * @param {Number} indexToInsertAt
    */
-  addFormElement(passedChild) {
+  addFormElement(passedChild, indexToInsertAt) {
     const child = passedChild;
 
     if (
@@ -310,7 +315,7 @@ export class LionSelectRich extends OverlayMixin(
 
     this.__delegateNameAttribute(child);
 
-    super.addFormElement(child);
+    super.addFormElement(child, indexToInsertAt);
 
     // we need to adjust the elements being registered
     /* eslint-disable no-param-reassign */
