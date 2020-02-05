@@ -279,5 +279,27 @@ describe('ChoiceGroupMixin', () => {
       expect(el.formElementsArray[0].checked).to.be.true;
       expect(el.formElementsArray[2].checked).to.be.true;
     });
+
+    it('unchecks non-matching checkboxes when setting the modelValue', async () => {
+      const el = await fixture(html`
+        <lion-checkbox-group name="gender[]">
+          <lion-checkbox .choiceValue=${'male'} checked></lion-checkbox>
+          <lion-checkbox .choiceValue=${'female'}></lion-checkbox>
+          <lion-checkbox .choiceValue=${'other'} checked></lion-checkbox>
+        </lion-checkbox-group>
+      `);
+
+      await nextFrame();
+      await el.registrationReady;
+      await el.updateComplete;
+      expect(el.modelValue).to.eql(['male', 'other']);
+      expect(el.formElementsArray[0].checked).to.be.true;
+      expect(el.formElementsArray[2].checked).to.be.true;
+
+      el.modelValue = ['female'];
+      expect(el.formElementsArray[0].checked).to.be.false;
+      expect(el.formElementsArray[1].checked).to.be.true;
+      expect(el.formElementsArray[2].checked).to.be.false;
+    });
   });
 });

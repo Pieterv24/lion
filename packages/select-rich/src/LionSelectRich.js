@@ -46,9 +46,11 @@ function isInView(container, element, partial = false) {
  * @customElement lion-select-rich
  * @extends {LitElement}
  */
-export class LionSelectRich extends OverlayMixin(
-  FormRegistrarMixin(
-    InteractionStateMixin(ChoiceGroupMixin(ValidateMixin(FormControlMixin(SlotMixin(LitElement))))),
+export class LionSelectRich extends ChoiceGroupMixin(
+  OverlayMixin(
+    FormRegistrarMixin(
+      InteractionStateMixin(ValidateMixin(FormControlMixin(SlotMixin(LitElement)))),
+    ),
   ),
 ) {
   static get properties() {
@@ -299,22 +301,7 @@ export class LionSelectRich extends OverlayMixin(
    */
   addFormElement(passedChild, indexToInsertAt) {
     const child = passedChild;
-
-    if (
-      typeof child.modelValue.checked !== 'boolean' ||
-      !Object.prototype.hasOwnProperty.call(child.modelValue, 'value')
-    ) {
-      throw new Error(
-        `The lion-select-rich name="${
-          this.name
-        }" does not allow to register ${child.tagName.toLowerCase()} with .modelValue="${
-          child.modelValue
-        }" - The modelValue should represent a type option with { value: "foo", checked: false }`,
-      );
-    }
-
     this.__delegateNameAttribute(child);
-
     super.addFormElement(child, indexToInsertAt);
 
     // we need to adjust the elements being registered

@@ -70,7 +70,7 @@ describe('lion-select-rich', () => {
     expect(() => {
       el.addFormElement(invalidChild);
     }).to.throw(
-      'The lion-select-rich name="foo" does not allow to register lion-option with .modelValue="Lara" - The modelValue should represent a type option with { value: "foo", checked: false }',
+      'The lion-select-rich name="foo" does not allow to register lion-option with .modelValue="Lara" - The modelValue should represent an Object { value: "foo", checked: false }',
     );
   });
 

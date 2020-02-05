@@ -116,7 +116,6 @@ export const ChoiceGroupMixin = superclass =>
 
     _getCheckedElements() {
       const filtered = this.formElementsArray.filter(el => el.checked === true);
-
       if (this.multipleChoice) {
         return filtered;
       }
@@ -139,9 +138,8 @@ export const ChoiceGroupMixin = superclass =>
 
         if (currentElIsCheckedEl) {
           this.formElementsArray[i].checked = true;
-          if (!this.multipleChoice) {
-            return;
-          }
+        } else if (this.multipleChoice) {
+          this.formElementsArray[i].checked = false;
         }
       }
     }
